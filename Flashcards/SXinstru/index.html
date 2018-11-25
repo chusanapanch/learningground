@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Surgical instruments v3</title>
+</head>
+
+<body>
+
+  <h3>Flash card : Surgical instruments v3</h3>
+  <br>
+  <img id = image width="300px">
+  <br>
+  <br>
+  <br>
+  <label for="answer">Answer</label> <input id = answer type = "text">
+  <button type="button" id = "sent" onclick = "check()">Check</button>
+  <p id = "correct"></p>
+  <p id = "key"></p>
+  <p id = "left"></p>
+  <p id = "hiddenKey" hidden></p>
+  <p id = "hiddenNumber" hidden></p>
+  <button type="button" id = "next" onclick = "random()">Next</button>
+
+  <script>
+
+var list = ["Allis forceps", "amputation knife", "amputation saw", "Army Navy retractor",
+"Babcock forceps", "Bake dilator", "bipolar diathermy","bone clamps", "Collin forceps",
+"Collin retractor","curved Doyen clamps", "curved forceps", "curved Mayo scissors", "curved Metzenbaum scissors",
+"curved mosquito clamps", "Cushing forceps", "Deaver retractor",
+"DeBakey forceps", "dermatome", "Doyen probe", "Faure biopsy punches", "Frazier suction",
+"Finochietto needle holder", "Finochietto retractor", "gallstone probe",
+"Gigli saw", "Gillies retractor", "Gosset retractor", "Gruenwald forceps", "Guyon clamps",
+"Guyon dilator", "Hegar dilator", "Hudson drill", "Iris scissors",
+"Jacobson needle holder", "Killian probe", "Kocher forceps", "malleable retractor",
+"Mathieu needle holder", "microsurgery scissors", "Mixter right angle clamps",
+"monopolar diathermy", "needle holder", "Nelson trocar",
+"Ochsner trocar", "plain forceps", "Poole suction", "potts smith scissors",
+"probe", "Randal forceps", "Richardson retractor", "Roeder clamps",
+"Sadson needle holder", "Satinsky clamps", "scalpel blade No.10",
+"scalpel blade No.11", "scalpel blade No.15", "scalpel handle No.3",
+"scalpel handle No.4", "Senn retractor", "sponge forceps",
+"straight crile clamps", "straight Doyen clamps", "straight Mayo scissors",
+"straight Metzenbaum scissors", "straight mosquito clamps",
+"Stratte needle holder", "suture scissors",
+"tooth Adson forceps", "tooth forceps", "Volkmann curette", "Weitlaner retractor",
+"wire cutter", "Yankauer suction", "Yeoman biopsy punches", "Bookwalter retractor",
+"sweetheart retractor", "curved Tonsil clamps", "curved Kelly clamps", "Gelpi retractor",
+"rake retractor", "Lahey forceps", "skin stapler remover", "Poppen suction"];
+
+var questionLeft = list.length
+document.getElementById("left").innerHTML = "Remaining flash card = " + questionLeft
+
+random();
+
+function random() {
+
+  var random = Math.floor(Math.random() * list.length);
+  var name = list[random]
+
+  document.getElementById("image").src = "picture/" + name + ".jpg"
+  document.getElementById("hiddenKey").innerHTML = name
+  document.getElementById("hiddenNumber").innerHTML = random
+  document.getElementById("correct").innerHTML = "";
+  document.getElementById("key").innerHTML = "";
+  document.getElementById("answer").value = ""
+  document.getElementById("sent").style.display = "initial"}
+
+function check() {
+  var correct
+  var key = document.getElementById("hiddenKey").innerHTML
+  var answer = document.getElementById("answer").value
+  var remove = document.getElementById("hiddenNumber").innerHTML
+  var msg
+
+  if (answer.toLowerCase() == key.toLowerCase()) {correct = "RIGHT! "; list.splice(remove,1); msg = "The " + key + " has been removed from the list"}
+  if (answer.toLowerCase() != key.toLowerCase()) {correct = "WRONG!"; msg = "The correct answer is " + key}
+    document.getElementById("correct").innerHTML = correct;
+    document.getElementById("key").innerHTML = msg
+    document.getElementById("sent").style.display = "none"
+
+    questionLeft = list.length
+
+  if (questionLeft == 0){document.getElementById("next").style.display = "none"};
+
+    document.getElementById("left").innerHTML = "Remaining flashcards = " + questionLeft;
+
+  if (questionLeft == 0){document.getElementById("left").innerHTML = "Congratulations, you've completed all flashcards in this set!"};
+}
+
+  </script>
+
+</body>
+</html>
